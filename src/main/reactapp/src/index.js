@@ -18,12 +18,18 @@ import Clock from './chapter4/Clock'
 // chapter5 실습
 import CommentList from './chapter5/CommentList';
 
+// chapter7 실습
+import Counter from './chapter7/Counter'
+import UseStateList from './chapter7/UseStateList';
+import UseStateList2 from './chapter7/UseStateList2';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>    
-    <CommentList/>
+    {/* <CommentList/> */}
+    {/* <Counter/> */}
+    <UseStateList/>
   </React.StrictMode>
 )
 // root.render(    //랜더링 되는 곳
