@@ -1,3 +1,4 @@
+/*
 package ezenweb.model.entity.team4;
 
 import jakarta.persistence.*;
@@ -37,3 +38,4 @@ public class BoardEntity2 {
     private int categoryb;// int default 0
 
 }
+*/

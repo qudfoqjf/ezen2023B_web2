@@ -14,9 +14,22 @@ import lombok.Setter;
 public class BoardEntity { // 테이블
     @Id //PK
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int bno;
+
+    private String btitle;
+
+    @JoinColumn //fk
+    @ManyToOne  // 다수가 하나에게
+    private MemberEntity memberEntity;
+
+
+
+
+}
+ /* @Id //PK
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int bno; //게시물 번호
     @Column(name="title", length = 10,nullable = false ,unique = true)                        //@Column 필드 타입설정
     private String btitle; //게시물 제목 varchar
     @Column(columnDefinition = "longtext")                        //@Column 필드 타입설정
-    private String btitle2;
-}
+    private String btitle2;*/

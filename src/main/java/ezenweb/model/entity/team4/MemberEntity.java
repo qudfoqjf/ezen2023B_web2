@@ -1,3 +1,4 @@
+/*
 package ezenweb.model.entity.team4;
 
 import jakarta.persistence.*;
@@ -44,3 +45,4 @@ public class MemberEntity {
     @Column(columnDefinition = "int default 0")
     private int mstate;
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package ezenweb.model.entity.team4;
 
 import jakarta.persistence.*;
@@ -26,3 +27,4 @@ public class ReplyEntity {
     @Column(nullable = false, columnDefinition = "int unsigned default 0")
     private int rpindex; // unsigned default 0 not null,
 }
+*/

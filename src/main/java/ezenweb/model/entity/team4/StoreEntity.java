@@ -1,3 +1,4 @@
+/*
 package ezenweb.model.entity.team4;
 
 import jakarta.persistence.*;
@@ -50,3 +51,4 @@ public class StoreEntity {
     @Column(nullable = false, columnDefinition = "int unsigned")
     private int mno;
 }
+*/
