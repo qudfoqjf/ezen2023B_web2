@@ -22,6 +22,16 @@ import CommentList from './chapter5/CommentList';
 import Counter from './chapter7/Counter'
 import UseStateList from './chapter7/UseStateList';
 import UseStateList2 from './chapter7/UseStateList2';
+import Counter2 from './chapter7/Counter2';
+
+// chapter8 실습
+import ConfirmButton from './chapter8/ConfirmButton';
+
+// chapter9 실습
+import LandingPage from './chapter9/LandingPage';
+
+// chapter10실습
+import AttendanceBook from './chapter10/AttendanceBook';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -29,7 +39,11 @@ root.render(
   <React.StrictMode>    
     {/* <CommentList/> */}
     {/* <Counter/> */}
-    <UseStateList/>
+    {/* <UseStateList/> */}
+    {/* <ConfirmButton/> */}
+    {/* <LandingPage/> */}
+    {/* <Counter2/> */}
+    <AttendanceBook/>
   </React.StrictMode>
 )
 // root.render(    //랜더링 되는 곳

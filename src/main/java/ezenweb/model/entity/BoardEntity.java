@@ -1,35 +1,76 @@
 package ezenweb.model.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.web.bind.annotation.GetMapping;
 
-@Entity //해당 클래스와 연동DB내 테이블과 매핑/연결(ORM)
-@Table(name="board")
-@Builder
-@Setter
-@NoArgsConstructor@AllArgsConstructor
-public class BoardEntity { // 테이블
-    @Id //PK
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+@Entity
+@Table(name = "board")
+@AllArgsConstructor@NoArgsConstructor
+@Getter @Setter@Builder@ToString
+public class BoardEntity {
+    @Id // PK
+    @GeneratedValue( strategy = GenerationType.IDENTITY) // AUTO_INCREMENT
     private int bno;
 
-    private String btitle;
+    @Column( columnDefinition = "longtext") // longtext
+    private String bcontent;
 
-    @JoinColumn //fk
-    @ManyToOne  // 다수가 하나에게
+    @Column
+    @ColumnDefault("0")     // int , default 0
+    private int bview;
+
+    // 단방향 : FK 필드
+    @JoinColumn( name="mno_fk")// fk필드명
+    @ManyToOne // 해당 필드 참조
     private MemberEntity memberEntity;
 
-
-
+    // 양방향 : 게시물fk
+    @OneToMany( mappedBy = "boardEntity")
+    @ToString.Exclude
+    @Builder.Default
+    private List<ReplyEntity> replyEntityList = new ArrayList<>();
 
 }
- /* @Id //PK
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int bno; //게시물 번호
-    @Column(name="title", length = 10,nullable = false ,unique = true)                        //@Column 필드 타입설정
-    private String btitle; //게시물 제목 varchar
-    @Column(columnDefinition = "longtext")                        //@Column 필드 타입설정
-    private String btitle2;*/
+/*
+    create table BoardEntitiy(
+        bno int ,
+        btitle varchar(255)
+    )
+
+
+    //    @Column(name = "title", length = 10 , nullable = false , unique = true )
+//    private String btitle; // 게시물제목
+//
+//    @Column(columnDefinition = "longtext")
+//    private String btitle2;
+//
+//    @Column(columnDefinition = "date")
+//    private String btitle3;
+//
+//    private boolean 필드0;
+//
+//    private byte 필드1;
+//    private short 필드2;
+//    private long 필드3;
+//
+//    private char 필드4;
+//
+//    private double 필드5;
+//    private float 필드6;
+//
+//    private Date 필드7;
+//    private LocalDateTime 필드8;
+//
+//    @Column( columnDefinition = "unsigned int(11)" )
+//    private int 필드9;
+
+
+*/
