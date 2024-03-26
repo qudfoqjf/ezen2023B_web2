@@ -30,8 +30,13 @@ import ConfirmButton from './chapter8/ConfirmButton';
 // chapter9 실습
 import LandingPage from './chapter9/LandingPage';
 
-// chapter10실습
+// chapter10 실습
 import AttendanceBook from './chapter10/AttendanceBook';
+
+// chapter11 실습
+import NameForm from './chapter11/NameForm';
+import SignUp from './chapter11/SignUp';
+import SignUp2 from './component/member/SignUp';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -43,7 +48,10 @@ root.render(
     {/* <ConfirmButton/> */}
     {/* <LandingPage/> */}
     {/* <Counter2/> */}
-    <AttendanceBook/>
+    {/* <AttendanceBook/> */}
+    {/* <NameForm/> */}
+    {/* <SignUp/> */}
+    <SignUp2/>
   </React.StrictMode>
 )
 // root.render(    //랜더링 되는 곳

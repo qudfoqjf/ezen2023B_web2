@@ -2,8 +2,8 @@ export default function AttendanceBook(props){
 
     //1. 샘플 데이터
     const students=[
-        {name: 'Inje'},{name:'Steve'},
-        {name:'Bill'},{name:'jeff'}
+        {id:1, name: 'Inje'},{id:2,name:'Steve'},
+        {id:3,name:'Bill'},{id:4,name:'jeff'}
     ]
     return(<>
         <ul>
@@ -13,11 +13,11 @@ export default function AttendanceBook(props){
                 students.map((student,index)=>{
                     return(<>
                     <li
-                     key={student.id}
+                     key={`student-id-${student.id}`}
                      id={student.id}
                      className={student.id}
                      >
-                        {students.name}
+                        {student.name}
                         </li>
                         </>)
                 })
