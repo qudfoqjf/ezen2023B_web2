@@ -38,8 +38,17 @@ import NameForm from './chapter11/NameForm';
 import SignUp from './chapter11/SignUp';
 import SignUp2 from './component/member/SignUp';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// chapter0 axios
+import Axios컴포넌트 from './chapter0/Axios컴포넌트';
 
+// chapter0 route
+import Route컴포넌트 from './chapter0/Route컴포넌트';
+
+// web2 라우터 컴포넌트
+import Index from './component/Index';
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>    
     {/* <CommentList/> */}
@@ -51,7 +60,10 @@ root.render(
     {/* <AttendanceBook/> */}
     {/* <NameForm/> */}
     {/* <SignUp/> */}
-    <SignUp2/>
+    {/* <SignUp2/> */}
+    {/* <Axios컴포넌트/> */}
+    {/* <Route컴포넌트/> */}
+    <Index/>
   </React.StrictMode>
 )
 // root.render(    //랜더링 되는 곳
