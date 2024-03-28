@@ -47,25 +47,31 @@ import Route컴포넌트 from './chapter0/Route컴포넌트';
 // web2 라우터 컴포넌트
 import Index from './component/Index';
 
+// chapter12 실습
+import Calculator from './chapter12/Carculator';
+
+// chapter13 실습
+import ProfileCard from './chapter13/ProfileCard';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>    
-    {/* <CommentList/> */}
-    {/* <Counter/> */}
-    {/* <UseStateList/> */}
-    {/* <ConfirmButton/> */}
-    {/* <LandingPage/> */}
-    {/* <Counter2/> */}
-    {/* <AttendanceBook/> */}
-    {/* <NameForm/> */}
-    {/* <SignUp/> */}
-    {/* <SignUp2/> */}
-    {/* <Axios컴포넌트/> */}
-    {/* <Route컴포넌트/> */}
-    <Index/>
-  </React.StrictMode>
-)
+root.render( 
+  // <CommentList/>
+  // <Counter />
+  // <UseStateList />
+  //<ConfirmButton />
+  //<LandingPage />
+  //<Counter2/>
+  //<AttendanceBook />s
+  //<NameForm />
+  //<SignUp />
+  //<SignUp />
+  //<Axios컴포넌트 />
+  //<Route컴포넌트 />
+  <Index />
+  //<Calculator />
+  //<ProfileCard />
+);
 // root.render(    //랜더링 되는 곳
 //   <React.StrictMode>   유효성검사 해주는 모드 (테스트한번 실행해줌)
 //     {/*<App /> */}

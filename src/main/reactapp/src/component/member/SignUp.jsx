@@ -15,10 +15,11 @@ export default function SignUp(props){
 
         axios.post( "/member/signup/post.do" , info )  // 4xx
             .then( response => { console.log( response ) // 2xx
-                if( response.data ){
+                if( response.data==3 ){
                     alert('회원가입 성공');
                     window.location.href = "/member/login"; // <a />
-                }else{    alert('회원가입 실패')   }
+                }else if(response.data==2){    alert('회원가입 실패')   }
+                else if(response.data==1){alert('이메일 중복')}
             })
             .catch( error =>{ console.log(error); } ) // 5xx
     }

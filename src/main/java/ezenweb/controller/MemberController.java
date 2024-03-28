@@ -11,9 +11,15 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("http://localhost:3000") // *요청 근원지를 교차 허용
 public class MemberController {
     @Autowired private MemberService memberService;
-    @PostMapping("/signup/post.do")
-    public boolean doSignupPost( @RequestBody MemberDto memberDto){
-        return memberService.doSignupPost( memberDto );
+    @PostMapping("/signup/post.do") //1. 회원가입
+    public int doSignupPost( @RequestBody MemberDto memberDto){
+        if(memberService.doDuplicate(memberDto.getMemail())){
+            if(memberService.doSignupPost(memberDto)){
+                return 3;// 회원가입 성공
+            }
+            return  2;  //회원가입 실패
+        }
+        return  1; //이메일 중복
     }
 
     @PostMapping("/login/post.do")   //2. 로그인
@@ -28,10 +34,17 @@ public class MemberController {
         return memberService.doLogOutGet();
     }
 
-    @GetMapping("/login/info/get.do")
+    @GetMapping("/login/info/get.do")   //4. 회원정보
     public MemberDto doLoginInfo(){
         return memberService.doLoginInfo();
     }
+
+ /*   //5. 아이디 중복검사
+    @PostMapping("/signup/duplicate.do")
+    public boolean doDuplicate(@RequestBody String mid){
+        System.out.println("mid = " + mid);
+        return memberService.doDuplicate(mid);
+    }*/
 
 
 

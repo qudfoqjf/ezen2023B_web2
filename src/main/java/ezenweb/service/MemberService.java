@@ -64,4 +64,18 @@ public class MemberService {
         return null;
     }
 
+    //5. 아이디 중복검사
+    public boolean doDuplicate(String mid) {
+        //1. 리포지토리를 통한 모든 회원 엔티티 호출
+        List<MemberEntity> memberEntityList =
+                memberEntityRepository.findAll();
+        for (int i = 0; i < memberEntityList.size(); i++) {
+            MemberEntity m = memberEntityList.get(i);
+            //3. 만약에 아이디가 동일하면 (엔티티와 dto)
+            if (m.getMemail().equals(mid)) {
+                return false;
+            }
+
+        }   return true;
+    }
 }
