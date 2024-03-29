@@ -48,7 +48,6 @@ public class MemberEntity extends BaseTime {
                 .mno(this.mno)
                 .mname(this.mname)
                 .memail(this.memail)
-                .mpassword(this.mpassword)
                 .mrol(this.mrol)
                 .build();
         //this ?? : 해당 메소드를 호출한 인스턴스

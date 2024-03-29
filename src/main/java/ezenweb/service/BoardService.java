@@ -1,5 +1,7 @@
 package ezenweb.service;
 
+import ezenweb.model.dto.BoardDto;
+import ezenweb.model.dto.MemberDto;
 import ezenweb.model.entity.BoardEntity;
 import ezenweb.model.entity.MemberEntity;
 import ezenweb.model.entity.ReplyEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BoardService {
@@ -26,38 +29,28 @@ public class BoardService {
      private MemberEntityRepository memberEntityRepository;
     @Autowired
     private ReplyEntityRepository replyEntityRepository;
+    @Autowired
+    private MemberService memberService;
     @Transactional
-    public boolean postBoard(){
-        //============테스트=============
-        //1. 회원가입
-            //1. 엔티티 객체 생성
-        MemberEntity memberEntity= MemberEntity.builder()
-                .memail("qwe@qwe.com").mpassword("1234").mname("유재석")
-                .build();
-            //2. 해당 엔티티를 db에 저장할 수 있도록 조작
-       MemberEntity saveMemberEntity= memberEntityRepository.save(memberEntity);
-        //2. 회원가입된 회원으로 글쓰기
-            //1.
-        BoardEntity boardEntity=BoardEntity.builder()
-                .bcontent("게시물글입니다.")
-                .build();
-            //2. 글쓴이
-        boardEntity.setMemberEntity((saveMemberEntity));
-            //3.
-        BoardEntity saveboardEntity=boardEntityRepository.save(boardEntity);
+    public boolean postBoard(BoardDto boardDto){//============테스트=============
+       MemberDto loginDto= memberService.doLoginInfo();
+       if(loginDto == null)return false;
 
-        //3. 해당 글에 댓글 작성
-            //1.
-        ReplyEntity replyEntity= ReplyEntity.builder()
-                .rcontent("댓글입니다")
-                .build();
-            //2-1.
-        replyEntity.setMemberEntity(saveMemberEntity);
-            //2-2
-        replyEntity.setBoardEntity(saveboardEntity);
-            //3.
-        replyEntityRepository.save(replyEntity);
+        //1. 로그인된 회원 엔티티 찾기
+        Optional<MemberEntity> optionalMemberEntity=
+        memberEntityRepository.findById(loginDto.getMno());
+        //2. 찾은 엔티티가 존재하지 않으면 실패;
+        if(!optionalMemberEntity.isPresent())return false;
+        //3. 엔티티 꺼내기
+        MemberEntity memberEntity = optionalMemberEntity.get();
 
+        //. 글쓰기
+        BoardEntity saveBoard=boardEntityRepository.save(boardDto.toEntity());
+        // fk대입
+        if(saveBoard.getBno()>=1){
+            saveBoard.setMemberEntity(memberEntity);
+            return true;
+        }
         return false;
     }
     @Transactional
