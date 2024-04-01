@@ -19,7 +19,7 @@ public class BoardController {
         return boardService.postBoard(boardDto);}
 
     @GetMapping("/get.do")
-    public List<Object> getBoard(){
+    public List<BoardDto> getBoard(){
         return boardService.getBoard();
     }
 

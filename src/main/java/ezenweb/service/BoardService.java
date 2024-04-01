@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,14 +55,23 @@ public class BoardService {
         return false;
     }
     @Transactional
-    public List<Object> getBoard(){
-        //1. 리포지토리를 이용한 모든 엔티티를 호출
+    public List<BoardDto> getBoard(){
+        //1. 리포지토리를 이용한 모든 엔티티를 호출(테이블에 매핑하기전 엔티티)를 호출
         List<BoardEntity> result=boardEntityRepository.findAll();
-        System.out.println(result);
-        System.out.println("result = " + result);
-        System.out.println("작성자 : " + result.get(0).getMemberEntity().getMemail() );
+        //2. Entity ---> Dto를 순회한다.
+        List<BoardDto> boardDtoList= new ArrayList<>();
+            //1. 꺼내온 entity를 순회한다.
+        for(int i=0; i<result.size(); i++){
+                //2. 하나씩 entity를 꺼낸다
+            BoardEntity boardEntity = result.get(i);
+                //3. 해당 엔티티를 dto로 변환한다.
+            BoardDto boardDto= boardEntity.toDto();
+                //4. 변환된 dto를 리스트에 담는다.
+            boardDtoList.add(boardDto);
+        }
 
-        return null;
+
+        return boardDtoList;
     }
     @Transactional
     public boolean putBoard(){

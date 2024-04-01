@@ -23,6 +23,7 @@ import Counter from './chapter7/Counter'
 import UseStateList from './chapter7/UseStateList';
 import UseStateList2 from './chapter7/UseStateList2';
 import Counter2 from './chapter7/Counter2';
+import TextInputWithFocusbutton from './chapter7/TextInputWithFocusButton';
 
 // chapter8 실습
 import ConfirmButton from './chapter8/ConfirmButton';
@@ -53,6 +54,9 @@ import Calculator from './chapter12/Carculator';
 // chapter13 실습
 import ProfileCard from './chapter13/ProfileCard';
 
+// chapter14 실습
+import DarkorLight from './chapter14/DarkOrLight';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render( 
@@ -69,8 +73,10 @@ root.render(
   //<Axios컴포넌트 />
   //<Route컴포넌트 />
   <Index />
+  // <DarkorLight/>
   //<Calculator />
   //<ProfileCard />
+  // <TextInputWithFocusbutton/>
 );
 // root.render(    //랜더링 되는 곳
 //   <React.StrictMode>   유효성검사 해주는 모드 (테스트한번 실행해줌)

@@ -1,10 +1,13 @@
 import axios from "axios";
+import { useContext } from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {LoginInfoContext} from "../Index";
 
 export default function Header( props ){
-    // 0. 로그인 정보 state 변수
-    const [loginInfo,setLoginInfo] = useState('');
+    // Provider 컴포넌트의 value 호출
+    const{loginInfo,setLoginInfo}= useContext(LoginInfoContext)
+    
 
     //컴포넌트 생성시 axios 실행해서 로그인 회원정보 호출
     //1. 컴포넌트가 실행될때 1번 axios 요청 보내서 회원정보 가져온다.
@@ -15,6 +18,15 @@ export default function Header( props ){
         })
         .catch(e=>{})
     },[])
+    //2. 로그아웃
+    const onLogout=()=>{
+        axios.get('member/logout/get.do')
+        .then(r=>{
+                if(r.data){alert('로그아웃 성공'); window.location.href="/member/login";}
+                else{alert('로그아웃 실패');}
+            })
+        setLoginInfo('');
+    }
 
 
 
@@ -26,7 +38,9 @@ export default function Header( props ){
                 <li> <Link to="/" > 홈 </Link></li>
                 <li> <Link to="/member/signup">회원가입</Link></li>
                 <li> <Link to="/member/login">로그인</Link></li>
-                <li> <Link to="/member/logout">로그아웃</Link></li>
+                <li> <button onClick={onLogout} type="button">로그아웃</button></li>
+                <li> <Link to="/board/write">글 쓰기</Link></li>
+                <li> <Link to="/board">전체글 보기</Link></li>
             </ul>    
         </div>    
     </>)
