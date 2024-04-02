@@ -14,12 +14,13 @@ public class BoardController {
     @Autowired private BoardService boardService;
 
     @PostMapping("post.do")
-    public boolean postBoard(BoardDto boardDto){
-
+    public int postBoard(BoardDto boardDto){
+        System.out.println("boardDto = " + boardDto);
         return boardService.postBoard(boardDto);}
 
     @GetMapping("/get.do")
     public List<BoardDto> getBoard(){
+        System.out.println(boardService.getBoard());
         return boardService.getBoard();
     }
 

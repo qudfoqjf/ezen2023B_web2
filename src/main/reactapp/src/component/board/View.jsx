@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import MediaCard from "./MediaCard";
 
 export default function View(props){
     //1. 상태변수
@@ -16,14 +17,13 @@ export default function View(props){
     console.log(boardInfo.bcontent);
     
     return(<>
-        <div>
-            {boardInfo.map((b)=>{
-                return(<>
-                <div>{b.bcontent}</div>
-                <div>{b.memail}</div>
-                </>)
-            })}
-
+        <div style={{display:"flex", flexWrap:"wrap"}}>
+            {boardInfo.map((board)=>{
+                return(
+                    <MediaCard board = {board}/>
+                )
+            })
+            }
         </div>
     </>
     );
