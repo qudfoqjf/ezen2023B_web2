@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BoardImgEntityRepository
-    extends JpaRepository<BoardImgEntity,Integer> {
+    extends JpaRepository<BoardImgEntity,String> {
 }

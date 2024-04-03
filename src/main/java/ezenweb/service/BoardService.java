@@ -2,6 +2,7 @@ package ezenweb.service;
 
 import ezenweb.model.dto.BoardDto;
 import ezenweb.model.dto.MemberDto;
+import ezenweb.model.dto.PageDto;
 import ezenweb.model.entity.BoardEntity;
 import ezenweb.model.entity.BoardImgEntity;
 import ezenweb.model.entity.MemberEntity;
@@ -12,6 +13,9 @@ import ezenweb.model.repository.MemberEntityRepository;
 import ezenweb.model.repository.ReplyEntityRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -74,7 +78,7 @@ public class BoardService {
         return 4; // 글등록 실패
     }
     @Transactional
-    public List<BoardDto> getBoard(){
+    public PageDto getBoard(int page,int view){
 /*        //==============================1====================================//
         //1. 리포지토리를 이용한 모든 엔티티를 호출(테이블에 매핑하기전 엔티티)를 호출
         List<BoardEntity> result=boardEntityRepository.findAll();
@@ -90,12 +94,32 @@ public class BoardService {
             boardDtoList.add(boardDto);
         }
         return boardDtoList;*/
-        return boardEntityRepository.findAll().stream().map((boardEntity) -> {
+        //============================================================//
+        Pageable pageable = PageRequest.of(page-1,4);
+
+        Page<BoardEntity> boardEntityPage=boardEntityRepository.findAll(pageable);
+
+        System.out.println("boardEntityPage.getTotalPages() = " + boardEntityPage.getTotalPages());
+
+        int count = boardEntityPage.getTotalPages();
+        List<BoardDto> data= boardEntityPage.stream().map((boardEntity) -> {
             return boardEntity.toDto();
         }).collect(Collectors.toList());
 
+        //2. 페이지 DTO 반환 타입 값 구성
+            //1.
+        PageDto pageDto=PageDto.builder()
+                .data(data)
+                .page(page)
+                .count(count)
+                .build();
+
+        return pageDto;
+        //====================page============================================
 
     }
+
+
     @Transactional
     public boolean putBoard(){
 
@@ -104,8 +128,16 @@ public class BoardService {
         return false;
     }
     @Transactional
-    public boolean deleteBoard(){
-        boardEntityRepository.deleteById(1);
+    public boolean deleteBoard(int bno){
+        MemberDto memberDto= memberService.doLoginInfo();
+        if(memberDto==null)return false;
+        //2.내 게시물 롹인
+        Optional<BoardEntity> optionalBoardEntity= boardEntityRepository.findById(bno);
+        if(optionalBoardEntity.isPresent()){
+            if (optionalBoardEntity.get().getMemberEntity().getMno()==memberDto.getMno()){
+                boardEntityRepository.deleteById(bno);return true;
+            }
+        }
 
         return false;
     }

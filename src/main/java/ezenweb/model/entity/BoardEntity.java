@@ -36,14 +36,14 @@ public class BoardEntity extends BaseTime {
     private MemberEntity memberEntity;
 
     // 양방향 : 게시물fk
-    @OneToMany( mappedBy = "boardEntity")
+    @OneToMany( mappedBy = "boardEntity",cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private List<ReplyEntity> replyEntityList = new ArrayList<>();
 
 
     //단방향:
-    @OneToMany(mappedBy = "boardEntity")
+    @OneToMany(mappedBy = "boardEntity",cascade = CascadeType.ALL)
     @ToString.Exclude
     @Builder.Default
     private List<BoardImgEntity> boardImgEntityList=new ArrayList<>();
