@@ -8,6 +8,7 @@ import LogOut from "./member/LogOut";
 import React, { useState } from "react";
 import Write from "./board/Write";
 import View from "./board/View";
+import Chatting from "./chat/Chatting";
 //===================컨텍스트 만들기=================//
 //1. React.createContext(초기값) 이용한 컨텍스트 선언 // import React from
 export const LoginInfoContext=React.createContext('');
@@ -31,6 +32,7 @@ export default function Index( props ){
                         <Route path="/member/login" element={ <Login /> } />
                         <Route path="/board/write" element={<Write/>}/>
                         <Route path="/board" element={<View/>}/>
+                        <Route path="/chat" element={<Chatting/>}/>
                     </Routes> 
                 
                     <Footer />
