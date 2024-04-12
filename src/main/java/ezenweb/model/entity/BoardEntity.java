@@ -32,25 +32,22 @@ public class BoardEntity extends BaseTime {
 
     // 단방향 : FK 필드
     @JoinColumn( name="mno_fk")// fk필드명
-    @ManyToOne // 해당 필드 참조
+    @ManyToOne// 해당 필드 참조
     private MemberEntity memberEntity;
 
     // 양방향 : 게시물fk
-    @OneToMany( mappedBy = "boardEntity",cascade = CascadeType.ALL)
+    @OneToMany( mappedBy = "boardEntity" , cascade = CascadeType.ALL )
     @ToString.Exclude
     @Builder.Default
     private List<ReplyEntity> replyEntityList = new ArrayList<>();
 
-
-    //단방향:
-    @OneToMany(mappedBy = "boardEntity",cascade = CascadeType.ALL)
+    // 양방향 설정
+    @OneToMany( mappedBy =  "boardEntity" , cascade = CascadeType.ALL )
     @ToString.Exclude
     @Builder.Default
-    private List<BoardImgEntity> boardImgEntityList=new ArrayList<>();
+    private List<BoardImgEntity> boardImgEntityList = new ArrayList<>();
 
-
-
-    // -
+    // - 게시물 출력
     public BoardDto toDto(){
         return  BoardDto.builder()
                 .bno( this.bno )
@@ -60,13 +57,17 @@ public class BoardEntity extends BaseTime {
                 .memail( memberEntity.getMemail() )
                 .cdate( this.getCdate() )
                 .udate( this.getUdate() )
-                .bimgList(this.boardImgEntityList.stream().map(
-                        (imgEntity)->{return imgEntity.getBimg();}
-                        ).collect(Collectors.toList())
+                .bimgList(
+                        this.boardImgEntityList.stream().map(
+                                ( imgEntity )->{ return imgEntity.getBimg(); }
+                        ).collect( Collectors.toList() )
                 )
-
+                // bimgList( List<String> )
+                    // [ "oo.jpg" , "oo.jpg" , "oo.jpg" , "oo.jpg" , "oo.jpg"  ]
+                // .uploadList( ) // 등록용
                 .build();
     }
+
 }
 /*
     create table BoardEntitiy(

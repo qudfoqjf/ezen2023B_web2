@@ -1,37 +1,42 @@
 package ezenweb.service;
 
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.UUID;
+
 @Service
 public class FileService {
-    //Controller: 중계자 역할(HTTP 매핑, HTTP 요청/응답, 데이터 유효성검사) 등등
-    //Service: Controller <-- Service(비지니스로직) --> Dao, Controller <--> Service(비지니스로직)
 
-    //어디에(PATH) 누구를(파일객체)
-    String uploadPath= "C:\\Users\\504\\Desktop\\ezen2023B_web2\\build\\resources\\main\\static\\uploadimg\\";
+    // 1. 업로드 경로
+        // 내장서버 경로
+    String uploadPath = "C:\\Users\\504\\Desktop\\ezen2023B_web2\\build\\resources\\main\\static\\uploadimg\\";
+        // AWS 경로
 
-    //1. 업로드 메소드
-    public String fileUpload(MultipartFile multipartFile){
-
-        String uuid= UUID.randomUUID().toString();  System.out.println("uuid = " + uuid);
-        String filename = uuid+"_"+multipartFile.getOriginalFilename().replaceAll("_","-");
-
-        //1. 첨부파일 업로드 하기[업로드란 : 클라이언트의 바이트(대용량/파일)을 서버로 복사
-        //1. 첨부파일을 저장할 경로
-        //File 클래스: 파일 관련된 메소드 제공
-        //new File(파일경로);
-        File file = new File(uploadPath+ filename);
-        System.out.println("file = " + file);
-        //2.[무엇을] 첨부파일 객체
-        // .transferTo
-        try{
-            multipartFile.transferTo(file);
-        }catch (Exception e){
-            System.out.println("e = " + e);
-            return null;
-        }return filename;
+    // 2. multipartFile 존재하는 파일 업로드
+    public String fileUpload(MultipartFile multipartFile ){
+        // 1. 파일 이름을 식별 가능한 uuid와 조합
+        String uuid = UUID.randomUUID().toString(); // UUID란?? 고유한 id 난수성으로 생성
+        // 2. 조합 ( uuid와 파일이름의 구분선을 _ 이기때문에 파일명에 _ 존재할수도 있기때문에 _를 - 로 치환 )
+        String filename = uuid+"_"+multipartFile.getOriginalFilename().replaceAll( "_" ,"-");
+        // 3.
+        File file = new File( uploadPath + filename );
+        // 4.
+        try {   multipartFile.transferTo(file);}
+        catch ( Exception e ){   System.out.println("e = " + e); return null;   }
+        return filename;
     }
 }
+
+
+
+
+
+
+
+
+
+
+

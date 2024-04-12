@@ -1,4 +1,3 @@
-
 package ezenweb.model.entity;
 
 import jakarta.persistence.EntityListeners;
